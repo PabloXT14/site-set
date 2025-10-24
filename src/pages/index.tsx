@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div className="bg-zinc-900">
-      <h2>Home</h2>
+    <div className="flex flex-col py-12">
+      <h2 className="text-gray-100">Home</h2>
     </div>
   )
 }

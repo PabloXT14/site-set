@@ -6,7 +6,7 @@ import { Logo } from "../logo"
 
 export const Header = () => {
   return (
-    <header className="fixed top-0 z-50 w-full border-white/10 border-b bg-background/95 backdrop-blur supports-[backdrop-filters]:bg-background/60">
+    <header className="fixed top-0 z-50 w-full border-gray-500 border-b backdrop-blur">
       {/* CONTAINER */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* CONTENT */}
