@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <header className="fixed top-0 z-50 w-full border-gray-500 border-b backdrop-blur">
       {/* CONTAINER */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4">
         {/* CONTENT */}
         <div className="flex h-16 items-center justify-between">
           <Logo />

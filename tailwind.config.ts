@@ -13,7 +13,7 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
         "2xl": "1280px",
       },
@@ -68,6 +68,9 @@ export default {
         "body-md": ["16px", { lineHeight: "150%", fontWeight: "400" }],
         "body-sm": ["14px", { lineHeight: "150%", fontWeight: "400" }],
         "body-xs": ["12px", { lineHeight: "150%", fontWeight: "400" }],
+
+        // Body  - Tag
+        "body-tag": ["12px", { lineHeight: "100%", fontWeight: "500" }],
 
         // Action - Inter
         "action-md": ["16px", { lineHeight: "normal", fontWeight: "500" }],
