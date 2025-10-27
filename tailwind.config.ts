@@ -52,8 +52,8 @@ export default {
         sm: "calc(0.5rem - 4px)",
       },
       fontFamily: {
-        sans: ["PT Sans Caption", "sans-serif"],
-        inter: ["Inter", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
+        caption: ["PT Sans Caption", "sans-serif"],
       },
       fontSize: {
         // Headings - PT Sans Caption
