@@ -76,6 +76,9 @@ export default {
         "action-md": ["16px", { lineHeight: "normal", fontWeight: "500" }],
         "action-sm": ["14px", { lineHeight: "normal", fontWeight: "500" }],
       },
+      backgroundImage: {
+        "call-to-action": "url('/bg-call-to-action.png')",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

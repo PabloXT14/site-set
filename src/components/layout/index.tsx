@@ -20,7 +20,7 @@ export const Layout = ({ children }: LayoutProps) => (
   >
     <Header />
 
-    <main className="mb-12 flex flex-1 flex-col">{children}</main>
+    <main className="flex flex-1 flex-col">{children}</main>
 
     <Footer />
   </div>
