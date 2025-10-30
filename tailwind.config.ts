@@ -77,7 +77,8 @@ export default {
         "action-sm": ["14px", { lineHeight: "normal", fontWeight: "500" }],
       },
       backgroundImage: {
-        "call-to-action": "url('/bg-call-to-action.png')",
+        "call-to-action": "url('/bg-call-to-action.svg')",
+        support: "url('/bg-support.svg')",
       },
     },
   },
