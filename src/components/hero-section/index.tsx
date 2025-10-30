@@ -5,14 +5,14 @@ import Link from "next/link"
 
 export const HeroSection = () => {
   return (
-    <section className="container relative mt-16 flex items-center justify-center">
+    <section className="container relative flex items-center justify-center">
       {/* CONTENT */}
       <div className="grid min-h-[22rem] grid-cols-1 items-center gap-14 md:h-[36rem] md:grid-cols-[1.16fr_0.94fr]">
         {/* TEXTS CONTAINER */}
         <div className="flex flex-col items-center justify-center gap-10 md:items-start md:gap-14">
           {/* TITLE */}
           <div className="flex flex-col items-center gap-6 md:items-start md:gap-8">
-            <h1 className="text-center text-gray-100 text-heading-lg md:text-left md:text-heading-hg">
+            <h1 className="text-center font-caption text-gray-100 text-heading-lg md:text-left md:text-heading-hg">
               Venda seus produtos como afiliado em um único lugar
             </h1>
 
