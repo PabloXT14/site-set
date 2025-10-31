@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, Store } from "lucide-react"
 
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 
 export const CallToAction = () => {
   return (

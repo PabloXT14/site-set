@@ -1,8 +1,8 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
-import { Button } from "../ui/button"
-import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
 export const FeatureSection = () => {
   return (
