@@ -1,3 +1,5 @@
+import { Search } from "@/components/search"
+
 export default function BlogPage() {
   return (
     <div className="flex h-full flex-grow flex-col gap-6 pt-5 pb-20 md:gap-14 md:pt-20 md:pb-32">
@@ -17,10 +19,7 @@ export default function BlogPage() {
             </h1>
           </div>
 
-          {/* SEARCH */}
-          <div>
-            <input type="text" placeholder="Pesquisar" className="" />
-          </div>
+          <Search />
         </div>
       </header>
 
