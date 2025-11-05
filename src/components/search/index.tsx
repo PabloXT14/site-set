@@ -1,12 +1,12 @@
 import { useCallback } from "react"
 import { useRouter } from "next/router"
-import { SearchIcon } from "lucide-react"
+import { CircleX, SearchIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 export const Search = () => {
   const router = useRouter()
-  const query = router.query.q as string
+  const query = (router.query.q as string) ?? ""
 
   const handleSearch = useCallback(
     (event: React.FormEvent) => {
@@ -28,17 +28,24 @@ export const Search = () => {
     })
   }
 
+  const resetSearch = () => {
+    router.push("/blog", undefined, {
+      shallow: true, // mantém a rota da página atual sem recarregar
+      scroll: false, // não rola para o topo
+    })
+  }
+
   return (
-    <form onSubmit={handleSearch} className="group relative w-full md:w-auto">
+    <form onSubmit={handleSearch} className="group relative w-full md:w-60">
       <div
         className={cn(
-          "flex h-10 w-full items-center gap-3 rounded-lg border border-gray-400 px-4 transition-all duration-200 group-focus-within:border-blue-300 md:w-60",
+          "flex h-10 w-full items-center gap-3 rounded-lg border border-gray-400 px-4 transition-all duration-200 group-focus-within:border-blue-300",
           query && "border-blue-300"
         )}
       >
         <SearchIcon
           className={cn(
-            "size-4 text-gray-300 transition-colors duration-200 group-focus-within:text-blue-300",
+            "size-4 flex-shrink-0 text-gray-300 transition-colors duration-200 group-focus-within:text-blue-300",
             query && "text-blue-300"
           )}
         />
@@ -48,8 +55,15 @@ export const Search = () => {
           placeholder="Buscar"
           onChange={handleQueryChange}
           value={query}
-          className="flex-grow bg-transparent text-body-sm text-gray-100 outline-none placeholder:text-body-sm placeholder:text-gray-300"
+          className="w-full bg-transparent text-body-sm text-gray-100 outline-none placeholder:text-body-sm placeholder:text-gray-300"
         />
+
+        {query && (
+          <CircleX
+            className="size-4 flex-shrink-0 cursor-pointer text-gray-300"
+            onClick={resetSearch}
+          />
+        )}
       </div>
     </form>
   )

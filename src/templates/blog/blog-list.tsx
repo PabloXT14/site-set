@@ -1,0 +1,38 @@
+import { Search } from "@/components/search"
+import { useRouter } from "next/router"
+
+export const BlogList = () => {
+  const router = useRouter()
+  const query = router.query.q as string
+
+  const pageTitle = query
+    ? `Resultados de busca para "${query}"`
+    : "Dicas e estratégias para impulsionar seu negócio"
+
+  return (
+    <div className="flex h-full flex-grow flex-col gap-6 pt-5 pb-20 md:gap-14 md:pt-20 md:pb-32">
+      {/* HEADER */}
+      <header className="container">
+        <div className="flex flex-col items-start justify-between space-y-6 md:flex-row md:items-end">
+          {/* TITLE CONTAINER */}
+          <div className="flex flex-col gap-3">
+            {/* TAG */}
+            <span className="w-fit rounded bg-cyan-300 px-3 py-1.5 text-body-tag text-cyan-100 uppercase">
+              Blog
+            </span>
+
+            {/* TITLE */}
+            <h1 className="max-w-2xl text-balance font-caption text-gray-100 text-heading-lg md:text-heading-xl">
+              {pageTitle}
+            </h1>
+          </div>
+
+          <Search />
+        </div>
+      </header>
+
+      {/* LIST OF POSTS */}
+      <div />
+    </div>
+  )
+}
