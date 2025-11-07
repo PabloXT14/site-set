@@ -1,9 +1,10 @@
 import { useRouter } from "next/router"
 
 import { Search } from "@/components/search"
-
 import { PostGridCard } from "./components/post-grid-card"
 import { PostCard } from "./components/post-card"
+
+import { allPosts } from "contentlayer/generated"
 
 export const BlogList = () => {
   const router = useRouter()
@@ -12,6 +13,8 @@ export const BlogList = () => {
   const pageTitle = query
     ? `Resultados de busca para "${query}"`
     : "Dicas e estratégias para impulsionar seu negócio"
+
+  const posts = allPosts
 
   return (
     <div className="flex h-full flex-grow flex-col gap-6 pt-5 pb-20 md:gap-14 md:pt-20 md:pb-32">
@@ -37,50 +40,15 @@ export const BlogList = () => {
 
       {/* LIST OF POSTS */}
       <PostGridCard>
-        <PostCard
-          data={{
-            slug: "post-1",
-            title: "Transformando seu negócio em uma loja virtual",
-            description:
-              "Se você está buscando uma maneira simples e eficaz de vender seus produtos online...",
-            image: "/assets/img-post-01.png",
-            date: "2024/12/20",
-            author: {
-              name: "Aspen Dokidis",
-              avatar: "/customer-01.jpg",
-            },
-          }}
-        />
-
-        <PostCard
-          data={{
-            slug: "post-1",
-            title: "Transformando seu negócio em uma loja virtual",
-            description:
-              "Se você está buscando uma maneira simples e eficaz de vender seus produtos online...",
-            image: "/assets/img-post-01.png",
-            date: "2024/12/20",
-            author: {
-              name: "Aspen Dokidis",
-              avatar: "/customer-01.jpg",
-            },
-          }}
-        />
-
-        <PostCard
-          data={{
-            slug: "post-1",
-            title: "Transformando seu negócio em uma loja virtual",
-            description:
-              "Se você está buscando uma maneira simples e eficaz de vender seus produtos online...",
-            image: "/assets/img-post-01.png",
-            date: "2024/12/20",
-            author: {
-              name: "Aspen Dokidis",
-              avatar: "/customer-01.jpg",
-            },
-          }}
-        />
+        {posts.map((post) => (
+          <PostCard
+            key={post._id}
+            data={{
+              ...post,
+              date: new Date(post.date).toLocaleDateString("pt-BR"),
+            }}
+          />
+        ))}
       </PostGridCard>
     </div>
   )

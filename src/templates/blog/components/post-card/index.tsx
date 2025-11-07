@@ -42,20 +42,20 @@ export const PostCard = ({ data }: PostCardProps) => {
       </div>
 
       {/* CONTENT */}
-      <div className="flex flex-col gap-3 p-2">
+      <div className="flex flex-grow flex-col gap-3 p-2">
         {/* INFO */}
         <div className="flex flex-col gap-2">
-          <h2 className="line-clamp-2 text-gray-100 text-heading-sm">
+          <h2 className="line-clamp-3 text-gray-100 text-heading-sm">
             {data.title}
           </h2>
 
-          <p className="line-clamp-2 text-body-sm text-gray-300">
+          <p className="line-clamp-3 text-body-sm text-gray-300">
             {data.description}
           </p>
         </div>
 
         {/* DIVIDER */}
-        <div className="h-px w-full bg-gray-400" />
+        <div className="mt-auto h-px w-full bg-gray-400" />
 
         {/* AUTHOR */}
         <div className="flex items-center gap-2">
