@@ -34,7 +34,7 @@ export const PostCard = ({ data }: PostCardProps) => {
       <div className="h-40 w-full overflow-hidden rounded-md">
         <Image
           src={data.image}
-          alt="first-post"
+          alt={data.title}
           width={288}
           height={144}
           className="h-full w-full object-cover object-center"

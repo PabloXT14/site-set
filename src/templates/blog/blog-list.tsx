@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import { Inbox } from "lucide-react"
 
 import { Search } from "@/components/search"
 import { PostGridCard } from "./components/post-grid-card"
@@ -14,7 +15,13 @@ export const BlogList = () => {
     ? `Resultados de busca para "${query}"`
     : "Dicas e estratégias para impulsionar seu negócio"
 
-  const posts = allPosts
+  const posts = query
+    ? allPosts.filter((post) =>
+        post.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+      )
+    : allPosts
+
+  const hasPosts = posts.length > 0
 
   return (
     <div className="flex h-full flex-grow flex-col gap-6 pt-5 pb-20 md:gap-14 md:pt-20 md:pb-32">
@@ -39,17 +46,32 @@ export const BlogList = () => {
       </header>
 
       {/* LIST OF POSTS */}
-      <PostGridCard>
-        {posts.map((post) => (
-          <PostCard
-            key={post._id}
-            data={{
-              ...post,
-              date: new Date(post.date).toLocaleDateString("pt-BR"),
-            }}
-          />
-        ))}
-      </PostGridCard>
+      {hasPosts && (
+        <PostGridCard>
+          {posts.map((post) => (
+            <PostCard
+              key={post._id}
+              data={{
+                ...post,
+                date: new Date(post.date).toLocaleDateString("pt-BR"),
+              }}
+            />
+          ))}
+        </PostGridCard>
+      )}
+
+      {!hasPosts && (
+        <div className="container">
+          {/* CONTENT */}
+          <div className="flex flex-col items-center justify-center gap-8 rounded-lg border-2 border-gray-300 border-dashed p-8 md:p-12">
+            <Inbox className="size-12 text-cyan-100" />
+
+            <span className="text-center text-body-md text-gray-100">
+              Nenhum post encontrado
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
