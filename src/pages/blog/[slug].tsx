@@ -10,6 +10,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Avatar } from "@/components/avatar"
 
 type PostPageParams = {
   slug: string
@@ -20,9 +21,12 @@ export default function PostPage() {
 
   const { slug } = router.query as PostPageParams
 
-  const post = allPosts.find((p) =>
-    p.slug.toLocaleLowerCase().includes(slug.toLocaleLowerCase())
-  )
+  // biome-ignore lint/style/noNonNullAssertion: needed
+  const post = allPosts.find(
+    (p) => p.slug.toLowerCase() === slug.toLowerCase()
+  )!
+
+  const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR")
 
   return (
     <main className="container pt-5 pb-20 md:pt-20 md:pb-32">
@@ -49,17 +53,31 @@ export default function PostPage() {
         <article className="overflow-hidden rounded-xl border border-gray-400 bg-gray-600">
           <figure className="relative aspect-[16/10] max-h-[264px] w-full overflow-hidden">
             <Image
-              src={post?.image ?? ""}
-              alt={post?.title ?? ""}
+              src={post?.image}
+              alt={post?.title}
               fill
               className="h-full w-full object-cover object-center"
             />
           </figure>
 
           {/* INFO */}
-          <div className="p-6">
-            <h2 className="text-gray-100 text-heading-lg">{post?.title}</h2>
-            <p className="text-gray-300">{post?.description}</p>
+          <div className="flex flex-col gap-8 p-6 pt-8 lg:gap-12 lg:p-16 lg:pt-12">
+            <header className="flex flex-col gap-6 lg:gap-8">
+              <h1 className="text-balance text-gray-100 text-heading-md lg:text-heading-xl">
+                {post?.title}
+              </h1>
+
+              <Avatar.Container>
+                <Avatar.Image src={post.author.avatar} alt={post.author.name} />
+                <Avatar.Content>
+                  <Avatar.Title>{post.author.name}</Avatar.Title>
+                  <Avatar.Description>
+                    Publicado em{" "}
+                    <time dateTime={post.date}>{publishedDate}</time>
+                  </Avatar.Description>
+                </Avatar.Content>
+              </Avatar.Container>
+            </header>
           </div>
         </article>
 
