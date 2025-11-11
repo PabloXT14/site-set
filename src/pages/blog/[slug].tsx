@@ -11,6 +11,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Avatar } from "@/components/avatar"
+import { Markdown } from "@/components/markdown"
 
 type PostPageParams = {
   slug: string
@@ -29,7 +30,7 @@ export default function PostPage() {
   const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR")
 
   return (
-    <main className="container pt-5 pb-20 md:pt-20 md:pb-32">
+    <div className="container pt-5 pb-20 md:pt-20 md:pb-32">
       {/* BREADCRUMBS */}
       <Breadcrumb className="mb-5 lg:mb-8">
         <BreadcrumbList>
@@ -78,6 +79,10 @@ export default function PostPage() {
                 </Avatar.Content>
               </Avatar.Container>
             </header>
+
+            <div className="prose prose-invert max-w-none">
+              <Markdown content={post.body.raw} />
+            </div>
           </div>
         </article>
 
@@ -86,6 +91,6 @@ export default function PostPage() {
           <h3>Compartilhar</h3>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
