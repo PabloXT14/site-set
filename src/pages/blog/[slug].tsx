@@ -22,9 +22,13 @@ export default function PostPage() {
 
   const { slug } = router.query as PostPageParams
 
+  if (!slug) {
+    return null
+  }
+
   // biome-ignore lint/style/noNonNullAssertion: needed
   const post = allPosts.find(
-    (p) => p.slug.toLowerCase() === slug.toLowerCase()
+    (p) => p.slug.toLocaleLowerCase() === slug.toLocaleLowerCase()
   )!
 
   const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR")
@@ -68,8 +72,12 @@ export default function PostPage() {
                 {post?.title}
               </h1>
 
-              <Avatar.Container>
-                <Avatar.Image src={post.author.avatar} alt={post.author.name} />
+              <Avatar.Container className="gap-3">
+                <Avatar.Image
+                  src={post.author.avatar}
+                  alt={post.author.name}
+                  size="sm"
+                />
                 <Avatar.Content>
                   <Avatar.Title>{post.author.name}</Avatar.Title>
                   <Avatar.Description>

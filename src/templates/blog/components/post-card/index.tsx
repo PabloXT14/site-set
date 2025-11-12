@@ -1,3 +1,4 @@
+import { Avatar } from "@/components/avatar"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -58,17 +59,11 @@ export const PostCard = ({ data }: PostCardProps) => {
         <div className="mt-auto h-px w-full bg-gray-400" />
 
         {/* AUTHOR */}
-        <div className="flex items-center gap-2">
-          <Image
-            src={data.author.avatar}
-            alt="author"
-            width={20}
-            height={20}
-            className="h-6 w-6 rounded-full border border-blue-200 object-cover"
-          />
+        <Avatar.Container>
+          <Avatar.Image src={data.author.avatar} alt="author" size="xs" />
 
-          <span className="text-body-sm text-gray-300">{data.author.name}</span>
-        </div>
+          <Avatar.Title>{data.author.name}</Avatar.Title>
+        </Avatar.Container>
       </div>
     </Link>
   )

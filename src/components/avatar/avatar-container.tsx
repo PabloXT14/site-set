@@ -1,7 +1,12 @@
-type AvatarContainerProps = {
-  children: React.ReactNode
-}
+import type { ComponentProps } from "react"
 
-export const AvatarContainer = ({ children }: AvatarContainerProps) => (
-  <div className="flex items-center gap-3">{children}</div>
+import { cn } from "@/lib/utils"
+
+type AvatarContainerProps = ComponentProps<"div">
+
+export const AvatarContainer = ({
+  className,
+  ...rest
+}: AvatarContainerProps) => (
+  <div className={cn("flex items-center gap-2", className)} {...rest} />
 )
