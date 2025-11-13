@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { allPosts } from "contentlayer/generated"
+import { Facebook, Linkedin, LinkIcon, Slack } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -12,10 +13,18 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Avatar } from "@/components/avatar"
 import { Markdown } from "@/components/markdown"
+import { Button } from "@/components/ui/button"
 
 type PostPageParams = {
   slug: string
 }
+
+const SHARE_LINKS = [
+  { name: "Linkedin", icon: Linkedin, url: "https://linkedin.com" },
+  { name: "Facebook", icon: Facebook, url: "https://facebook.com" },
+  { name: "Slack", icon: Slack, url: "https://slack.com" },
+  { name: "Copiar link", icon: LinkIcon, url: "https://google.com" },
+]
 
 export default function PostPage() {
   const router = useRouter()
@@ -95,9 +104,18 @@ export default function PostPage() {
         </article>
 
         {/* SHARE */}
-        <div>
-          <h3>Compartilhar</h3>
-        </div>
+        <aside className="space-y-5">
+          <h2 className="text-gray-100 text-heading-xs">Compartilhar</h2>
+
+          <div className="flex flex-col gap-3">
+            {SHARE_LINKS.map(({ name, url, icon: Icon }) => (
+              <Button key={name} variant="outline" className="justify-start">
+                <Icon />
+                {name}
+              </Button>
+            ))}
+          </div>
+        </aside>
       </div>
     </div>
   )
