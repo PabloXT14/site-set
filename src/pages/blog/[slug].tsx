@@ -2,7 +2,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { allPosts } from "contentlayer/generated"
-import { Facebook, Linkedin, LinkIcon, Slack } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -15,16 +14,11 @@ import { Avatar } from "@/components/avatar"
 import { Markdown } from "@/components/markdown"
 import { Button } from "@/components/ui/button"
 
+import { useShare } from "@/hooks/use-share"
+
 type PostPageParams = {
   slug: string
 }
-
-const SHARE_LINKS = [
-  { name: "Linkedin", icon: Linkedin, url: "https://linkedin.com" },
-  { name: "Facebook", icon: Facebook, url: "https://facebook.com" },
-  { name: "Slack", icon: Slack, url: "https://slack.com" },
-  { name: "Copiar link", icon: LinkIcon, url: "https://google.com" },
-]
 
 export default function PostPage() {
   const router = useRouter()
@@ -41,6 +35,14 @@ export default function PostPage() {
   )!
 
   const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR")
+  const postUrl = `https://site.set/blog/${post?.slug}`
+
+  // biome-ignore lint/correctness/useHookAtTopLevel: needed
+  const { shareButtons } = useShare({
+    url: postUrl,
+    title: post.title,
+    text: post.description,
+  })
 
   return (
     <div className="container pt-5 pb-20 md:pt-20 md:pb-32">
@@ -108,9 +110,14 @@ export default function PostPage() {
           <h2 className="text-gray-100 text-heading-xs">Compartilhar</h2>
 
           <div className="flex flex-col gap-3">
-            {SHARE_LINKS.map(({ name, url, icon: Icon }) => (
-              <Button key={name} variant="outline" className="justify-start">
-                <Icon />
+            {shareButtons.map(({ provider, name, icon, action }) => (
+              <Button
+                key={provider}
+                variant="outline"
+                className="w-full justify-start"
+                onClick={action}
+              >
+                {icon}
                 {name}
               </Button>
             ))}
