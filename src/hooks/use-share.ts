@@ -37,7 +37,7 @@ export const useShare = ({
         const shareWindow = window.open(
           shareUrl,
           "_blank",
-          "width=600, height=400, location=yes, status=yes"
+          "width=600, height=600, location=yes, status=yes"
         )
 
         return !!shareWindow
