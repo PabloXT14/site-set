@@ -12,6 +12,7 @@ export type SocialProviderNames =
   | "slack"
   | "twitter"
   | "threads"
+  | "clipboard"
 
 export type SocialProviderProps = {
   name: string
@@ -19,10 +20,7 @@ export type SocialProviderProps = {
   shareUrl: (config: ShareConfig) => string
 }
 
-export const SOCIAL_PROVIDERS: Record<
-  SocialProviderNames,
-  SocialProviderProps
-> = {
+export const SOCIAL_PROVIDERS = {
   linkedin: {
     name: "LinkedIn",
     icon: <Linkedin className="size-4" />,
