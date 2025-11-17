@@ -1,5 +1,4 @@
 import {
-  CallToAction,
   CustomerStorySection,
   FeatureSection,
   HeroSection,
@@ -12,6 +11,5 @@ export const LandingPage = () => (
     <FeatureSection />
     <SupportSection />
     <CustomerStorySection />
-    <CallToAction />
   </article>
 )
