@@ -5,9 +5,13 @@ import { Search } from "@/components/search"
 import { PostGridCard } from "./components/post-grid-card"
 import { PostCard } from "./components/post-card"
 
-import { allPosts } from "contentlayer/generated"
+import type { Post } from "contentlayer/generated"
 
-export const BlogList = () => {
+export type BlogListProps = {
+  posts: Post[]
+}
+
+export const BlogList = ({ posts }: BlogListProps) => {
   const router = useRouter()
   const query = router.query.q as string
 
@@ -15,13 +19,13 @@ export const BlogList = () => {
     ? `Resultados de busca para "${query}"`
     : "Dicas e estratégias para impulsionar seu negócio"
 
-  const posts = query
-    ? allPosts.filter((post) =>
+  const postList = query
+    ? posts.filter((post) =>
         post.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
       )
-    : allPosts
+    : posts
 
-  const hasPosts = posts.length > 0
+  const hasPosts = postList.length > 0
 
   return (
     <div className="flex h-full flex-grow flex-col gap-6 pt-5 pb-20 md:gap-14 md:pt-20 md:pb-32">
@@ -48,7 +52,7 @@ export const BlogList = () => {
       {/* LIST OF POSTS */}
       {hasPosts && (
         <PostGridCard>
-          {posts.map((post) => (
+          {postList.map((post) => (
             <PostCard
               key={post._id}
               data={{
