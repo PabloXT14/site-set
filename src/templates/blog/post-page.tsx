@@ -1,7 +1,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { allPosts } from "contentlayer/generated"
+
+import type { Post } from "contentlayer/generated"
 
 import {
   Breadcrumb,
@@ -16,32 +17,31 @@ import { Button } from "@/components/ui/button"
 
 import { useShare } from "@/hooks/use-share"
 
-type PostPageParams = {
+type RouteParams = {
   slug: string
 }
 
-export const PostPage = () => {
+export type PostPageProps = {
+  post: Post
+}
+
+export const PostPage = ({ post }: PostPageProps) => {
   const router = useRouter()
 
-  const { slug } = router.query as PostPageParams
+  const { slug } = router.query as RouteParams
 
   if (!slug) {
     return null
   }
 
-  // biome-ignore lint/style/noNonNullAssertion: needed
-  const post = allPosts.find(
-    (p) => p.slug.toLocaleLowerCase() === slug.toLocaleLowerCase()
-  )!
-
-  const publishedDate = new Date(post?.date ?? "").toLocaleDateString("pt-BR")
+  const publishedDate = new Date(post?.date).toLocaleDateString("pt-BR")
   const postUrl = `https://site.set/blog/${post?.slug}`
 
   // biome-ignore lint/correctness/useHookAtTopLevel: needed
   const { shareButtons } = useShare({
     url: postUrl,
-    title: post.title,
-    text: post.description,
+    title: post?.title,
+    text: post?.description,
   })
 
   return (
