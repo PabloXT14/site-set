@@ -1,12 +1,13 @@
 import { useCallback } from "react"
-import { useRouter } from "next/router"
+import { useRouter, useSearchParams } from "next/navigation"
 import { CircleX, SearchIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 export const Search = () => {
   const router = useRouter()
-  const query = (router.query.q as string) ?? ""
+  const searchParams = useSearchParams()
+  const query = searchParams?.get("q") ?? ""
 
   const handleSearch = useCallback(
     (event: React.FormEvent) => {
@@ -22,15 +23,14 @@ export const Search = () => {
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = event.target.value
 
-    router.push(`/blog?q=${encodeURIComponent(newQuery)}`, undefined, {
-      shallow: true, // mantém a rota da página atual sem recarregar
+    router.push(`/blog?q=${encodeURIComponent(newQuery)}`, {
+      // shallow: true, // mantém a rota da página atual sem recarregar
       scroll: false, // não rola para o topo
     })
   }
 
   const resetSearch = () => {
-    router.push("/blog", undefined, {
-      shallow: true, // mantém a rota da página atual sem recarregar
+    router.push("/blog", {
       scroll: false, // não rola para o topo
     })
   }
