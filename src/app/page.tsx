@@ -1,5 +1,8 @@
-import { LandingPage } from "@/templates/landing-page"
+// import { LandingPage } from "@/templates/landing-page"
+import { ErrorComponent } from "./error-component"
 
 export default function HomePage() {
-  return <LandingPage />
+  return <ErrorComponent />
+
+  // return <LandingPage />
 }
