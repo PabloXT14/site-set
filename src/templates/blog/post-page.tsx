@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/router"
 
 import type { Post } from "contentlayer/generated"
 
@@ -19,27 +18,14 @@ import { Button } from "@/components/ui/button"
 
 import { useShare } from "@/hooks/use-share"
 
-type RouteParams = {
-  slug: string
-}
-
 export type PostPageProps = {
   post: Post
 }
 
 export const PostPage = ({ post }: PostPageProps) => {
-  const router = useRouter()
-
-  const { slug } = router.query as RouteParams
-
-  if (!slug) {
-    return null
-  }
-
   const publishedDate = new Date(post?.date).toLocaleDateString("pt-BR")
   const postUrl = `https://site.set/blog/${post?.slug}`
 
-  // biome-ignore lint/correctness/useHookAtTopLevel: needed
   const { shareButtons } = useShare({
     url: postUrl,
     title: post?.title,
