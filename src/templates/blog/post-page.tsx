@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 
@@ -14,9 +12,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Avatar } from "@/components/avatar"
 import { Markdown } from "@/components/markdown"
-import { Button } from "@/components/ui/button"
-
-import { useShare } from "@/hooks/use-share"
+import { PostShare } from "./components/post-share"
 
 export type PostPageProps = {
   post: Post
@@ -25,12 +21,6 @@ export type PostPageProps = {
 export const PostPage = ({ post }: PostPageProps) => {
   const publishedDate = new Date(post?.date).toLocaleDateString("pt-BR")
   const postUrl = `https://site.set/blog/${post?.slug}`
-
-  const { shareButtons } = useShare({
-    url: postUrl,
-    title: post?.title,
-    text: post?.description,
-  })
 
   return (
     <div className="container pt-5 pb-20 md:pt-20 md:pb-32">
@@ -94,23 +84,13 @@ export const PostPage = ({ post }: PostPageProps) => {
         </article>
 
         {/* SHARE */}
-        <aside className="space-y-5">
-          <h2 className="text-gray-100 text-heading-xs">Compartilhar</h2>
-
-          <div className="flex flex-wrap gap-2 lg:flex-col">
-            {shareButtons.map(({ provider, name, icon, action }) => (
-              <Button
-                key={provider}
-                variant="outline"
-                className="w-fit justify-start px-3 lg:w-full lg:px-4"
-                onClick={action}
-              >
-                {icon}
-                <span className="hidden lg:inline">{name}</span>
-              </Button>
-            ))}
-          </div>
-        </aside>
+        <PostShare
+          post={{
+            url: postUrl,
+            title: post?.title,
+            description: post?.description,
+          }}
+        />
       </div>
     </div>
   )
