@@ -7,7 +7,7 @@ const CUSTOMER_STORIES = [
     author: {
       name: "Annete Bones",
       role: "CEO na Anne Corp",
-      avatar: "/customer-01.jpg",
+      avatar: "/customer-01.png",
     },
   },
   {
@@ -16,7 +16,7 @@ const CUSTOMER_STORIES = [
     author: {
       name: "Jacob Jones",
       role: "CEO na JJ Corp",
-      avatar: "/customer-02.jpg",
+      avatar: "/customer-02.png",
     },
   },
 ]
