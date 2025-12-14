@@ -1,10 +1,12 @@
+import type { Metadata } from "next"
+
 import "@/styles/globals.css"
 
 import { Layout } from "@/components/layout"
 
-export const metadata = {
-  title: "Site Set",
-  description: "A blog about affiliate marketing and online business.",
+export const metadata: Metadata = {
+  title: "Site.Set",
+  description: "Venda seus produtos como afiliado em um único lugar.",
 }
 
 export default function RootLayout({
