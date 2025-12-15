@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { allPosts } from "contentlayer/generated"
 
@@ -7,6 +8,30 @@ type Params = {
   params: Promise<{
     slug: string
   }>
+}
+
+// Metadata dinâmico no App Router
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params
+
+  const post = allPosts.find((p) => p.slug === slug)
+
+  if (!post) {
+    return {
+      title: "Post not found",
+      description: "The requested blog post could not be found.",
+    }
+  }
+
+  return {
+    title: post.title,
+    description: post.description,
+    authors: [{ name: post.author.name }],
+    robots: "index, follow",
+    openGraph: {
+      images: [post.image],
+    },
+  }
 }
 
 // SSG no App Router
